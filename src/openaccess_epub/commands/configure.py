@@ -160,13 +160,13 @@ def user_prompt(config_dict, key, text, default=None, validator=nonempty):
             prompt = '> {0} [{1}]: '.format(text, default)
         else:
             prompt = '> {0}: '.format(text)
-        user_inp = input(prompt)
+        user_inp = eval(input(prompt))
         if default and not user_inp:
             user_inp = default
         try:
             user_inp = validator(user_inp)
         except ValidationError as error:
-            print('* ' + str(error))
+            print(('* ' + str(error)))
             continue
         break
     config_dict[key] = user_inp
@@ -229,7 +229,7 @@ def configure(default=None, dev=None):
 
         with open(config_loc, 'wb') as conf_out:
             conf_out.write(bytes(config, 'UTF-8'))
-        print('The config file has been written to {0}'.format(config_loc))
+        print(('The config file has been written to {0}'.format(config_loc)))
         return
 
     config_dict = {'now': time.asctime(),
@@ -243,12 +243,12 @@ for the settings, shown in brackets, just push Enter.
 
 -------------------------------------------------------------------------------\
 ''')
-    print('''
+    print(('''
 OpenAccess_EPUB defines a default cache location for the storage of various
 data (and the global config.py file), this location is:\n\n{0}
-'''.format(cache_loc))
+'''.format(cache_loc)))
 
-    input('Press Enter to start...')
+    eval(input('Press Enter to start...'))
 
     #Image Configuration
     print('''
@@ -351,7 +351,7 @@ def main(argv=None):
                   options_first=True)
 
     if args['where']:
-        print(openaccess_epub.utils.config_location())
+        print((openaccess_epub.utils.config_location()))
         return
 
     try:

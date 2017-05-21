@@ -12,6 +12,7 @@ from copy import copy, deepcopy
 from importlib import import_module
 import logging
 import sys
+import collections
 try:
     from importlib.abc import SourceLoader
 except ImportError:  # Compatibility for Python 3.0 and 3.1
@@ -185,7 +186,7 @@ class Publisher(object):
 post-processing, removing it''')
                     remove(element)
                     return
-            if tag_method is not None and callable(tag_method):
+            if tag_method is not None and isinstance(tag_method, collections.Callable):
                 tag_method(element, epub_version)
             for subel in element:
                 recursive_traverse(subel)

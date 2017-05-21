@@ -96,7 +96,7 @@ def remove_all_attributes(element, exclude=None):
     """
     if exclude is None:
         exclude = []
-    for k in element.attrib.keys():
+    for k in list(element.attrib.keys()):
         if k not in exclude:
             element.attrib.pop(k)
 
@@ -140,7 +140,7 @@ def ns_format(element, namespaced_string):
     xlink:href.
     """
     if ':' not in namespaced_string:
-        print('This name contains no namespace, returning it unmodified: ' + namespaced_string)
+        print(('This name contains no namespace, returning it unmodified: ' + namespaced_string))
         return namespaced_string
     namespace, name = namespaced_string.split(':')
     return '{' + element.nsmap[namespace] + '}' + name
@@ -153,7 +153,7 @@ def rename_attributes(element, attrs):
     the altered names. This method treats all attributes as optional and will
     not fail on missing attributes.
     """
-    for name in attrs.keys():
+    for name in list(attrs.keys()):
         if name not in element.attrib:
             continue
         else:
@@ -194,10 +194,10 @@ def elevate_element(node, adopt_name=None, adopt_attrs=None):
             else:
                 adopt = etree.Element(adopt_name)
             if adopt_attrs is None:
-                for key in parent.attrib.keys():
+                for key in list(parent.attrib.keys()):
                     adopt.attrib[key] = parent.attrib[key]
             else:
-                for key in adopt_attrs.keys():
+                for key in list(adopt_attrs.keys()):
                     adopt.attrib[key] = adopt_attrs[key]
             #Insert the adoptive parent after the elevated child
             grandparent.insert(grandparent.index(node)+1, adopt)

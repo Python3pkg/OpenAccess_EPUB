@@ -200,7 +200,7 @@ without a publisher!''')
 
     def make_element(self, tagname, doc, attrs={}, text=''):
         new_element = etree.Element(self.ns_rectify(tagname, doc))
-        for kwd, val in attrs.items():
+        for kwd, val in list(attrs.items()):
             if val is None:  # None values will not become attributes
                 continue
             new_element.attrib[self.ns_rectify(kwd, doc)] = val
@@ -326,7 +326,7 @@ All articles in this collection published according to the following license:
 Articles in this collection were published according to different licenses. Each
 unique license will be listed below, preceded by every article DOI to which it
 applies.'''
-                for lic, doi_list in self.rights_associations.items():
+                for lic, doi_list in list(self.rights_associations.items()):
                     doi_line = ','.join(doi_list)
                     rights_text = '\n'.join([rights_text, doi_line, lic])
                 metadata.append(self.make_element('dc:rights',
@@ -543,7 +543,7 @@ All articles in this collection published according to the following license:
 Articles in this collection were published according to different licenses. Each
 unique license will be listed below, preceded by every article DOI to which it
 applies.'''
-                for lic, doi_list in self.rights_associations.items():
+                for lic, doi_list in list(self.rights_associations.items()):
                     doi_line = ','.join(doi_list)
                     rights_text = '\n'.join([rights_text, doi_line, lic])
             metadata.append(self.make_element('dc:rights',

@@ -201,7 +201,7 @@ def fetch_frontiers_images(doi, output_dir):
                 except:
                     return None
             elif e.code == 500:
-                print('urllib.error.HTTPError {0}'.format(e.code))
+                print(('urllib.error.HTTPError {0}'.format(e.code)))
             return None
         else:
             with open(img_file, 'wb') as outimage:
@@ -234,17 +234,17 @@ def fetch_frontiers_images(doi, output_dir):
         for m in missing:
             loc = os.path.join(output_dir, m)
             download_image(get + m, loc)
-            print('Downloaded image {0}'.format(loc))
+            print(('Downloaded image {0}'.format(loc)))
         #It is possible that we need to go further than the highest
         highest += 1
         name = 'i{0}.gif'.format(str(highest).zfill(3))
         loc = os.path.join(output_dir, name)
         while download_image(get + name, loc):
-            print('Downloaded image {0}'.format(loc))
+            print(('Downloaded image {0}'.format(loc)))
             highest += 1
             name = 'i{0}.gif'.format(str(highest).zfill(3))
 
-    print('Processing images for {0}...'.format(doi))
+    print(('Processing images for {0}...'.format(doi)))
     #We use the DOI of the article to locate the page.
     doistr = 'http://dx.doi.org/{0}'.format(doi)
     logging.debug('Accessing DOI address-{0}'.format(doistr))
@@ -267,7 +267,7 @@ def fetch_frontiers_images(doi, output_dir):
     for i in images:
         loc = os.path.join(output_dir, i.split('-')[-1])
         download_image(i, loc)
-        print('Downloaded image {0}'.format(loc))
+        print(('Downloaded image {0}'.format(loc)))
     if images:
         check_equation_completion(images)
     print("Done downloading images")

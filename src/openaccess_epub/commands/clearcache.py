@@ -46,7 +46,7 @@ import openaccess_epub.utils
 
 def empty_it(path, dry_run):
     if dry_run:
-        print('Deleting all contents of {0}'.format(path))
+        print(('Deleting all contents of {0}'.format(path)))
         return
     for root, dirs, files in os.walk(path):
         for f in files:

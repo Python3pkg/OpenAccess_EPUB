@@ -196,7 +196,7 @@ def get_output_directory(args):
     try:
         config = imp.load_source('config', config_path)
     except IOError:
-        print('Could not find {0}, please run oae-quickstart'.format(config_path))
+        print(('Could not find {0}, please run oae-quickstart'.format(config_path)))
         sys.exit()
     #args.output is the explicit user instruction, None if unspecified
     if args.output:
@@ -316,9 +316,9 @@ def dir_exists(directory):
     the user responds negatively, then the process will abort.
     """
     log.info('Directory exists! Asking the user')
-    reply = input('''The directory {0} already exists.
+    reply = eval(input('''The directory {0} already exists.
 It will be overwritten if the operation continues.
-Replace? [Y/n]'''.format(directory))
+Replace? [Y/n]'''.format(directory)))
     if reply.lower() in ['y', 'yes', '']:
         shutil.rmtree(directory)
         os.makedirs(directory)
